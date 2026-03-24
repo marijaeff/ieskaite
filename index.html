@@ -114,6 +114,18 @@
             border-radius: 50%;
         }
 
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         /* Header */
         .site-header {
             position: sticky;
@@ -201,6 +213,40 @@
             display: flex;
             align-items: center;
             gap: 12px;
+        }
+
+        .lang-switcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(140, 183, 161, 0.22);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .lang-btn {
+            border: 0;
+            background: transparent;
+            border-radius: 999px;
+            padding: 8px 12px;
+            font: inherit;
+            font-weight: 700;
+            color: var(--muted);
+            cursor: pointer;
+            transition: 0.2s ease;
+            min-width: 46px;
+        }
+
+        .lang-btn:hover {
+            color: var(--accent-dark);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--accent-soft), #fff);
+            color: var(--accent-dark);
         }
 
         .menu-toggle {
@@ -327,8 +373,6 @@
             min-height: 580px;
             overflow: hidden;
         }
-
-
 
         .blob {
             position: absolute;
@@ -1242,6 +1286,15 @@
                 object-fit: contain;
             }
 
+            .lang-switcher {
+                padding: 4px;
+            }
+
+            .lang-btn {
+                padding: 7px 10px;
+                min-width: 42px;
+            }
+
             @media (max-width: 860px) {
                 .brand-logo {
                     height: 48px;
@@ -1255,31 +1308,36 @@
     <header class="site-header">
         <div class="container">
             <nav class="nav" id="nav">
-                <a href="#home" class="brand" aria-label="Sajūtu Krāsas sākumlapa">
-                    <img src="logo.png" alt="Sajūtu Krāsas logo" class="brand-logo" />
+                <a href="#home" class="brand" data-i18n-aria-label="brand.homeAria" aria-label="Sajūtu Krāsas sākumlapa">
+                    <img src="logo.png" data-i18n-alt="brand.logoAlt" alt="Sajūtu Krāsas logo" class="brand-logo" />
                 </a>
 
                 <div class="nav-links">
-                    <a href="#par-mums">Par mums</a>
-                    <a href="#pakalpojumi">Pakalpojumi</a>
-                    <a href="#pieeja">Pieeja</a>
-                    <a href="#jautajumi">Jautājumi</a>
-                    <a href="#kontakti">Kontakti</a>
+                    <a href="#par-mums" data-i18n="nav.about"></a>
+                    <a href="#pakalpojumi" data-i18n="nav.services"></a>
+                    <a href="#pieeja" data-i18n="nav.approach"></a>
+                    <a href="#jautajumi" data-i18n="nav.questions"></a>
+                    <a href="#kontakti" data-i18n="nav.contacts"></a>
                 </div>
 
                 <div class="nav-actions">
-                    <a class="btn btn-secondary" href="#pakalpojumi">Uzzināt vairāk</a>
-                    <a class="btn btn-primary" href="#kontakti">Pieteikt konsultāciju</a>
-                    <button class="menu-toggle" id="menuToggle" aria-label="Atvērt izvēlni"></button>
+                    <div class="lang-switcher" data-i18n-aria-label="language.switcherAria" aria-label="Valodas izvēle">
+                        <span class="sr-only" data-i18n="language.switcherLabel"></span>
+                        <button type="button" class="lang-btn" data-lang="lv" data-i18n="language.lv"></button>
+                        <button type="button" class="lang-btn" data-lang="en" data-i18n="language.en"></button>
+                    </div>
+                    <a class="btn btn-secondary" href="#pakalpojumi" data-i18n="nav.learnMore"></a>
+                    <a class="btn btn-primary" href="#kontakti" data-i18n="nav.book"></a>
+                    <button class="menu-toggle" id="menuToggle" data-i18n-aria-label="menu.openAria" aria-label="Atvērt izvēlni"></button>
                 </div>
 
                 <div class="nav-panel" id="navPanel">
-                    <a href="#par-mums">Par mums</a>
-                    <a href="#pakalpojumi">Pakalpojumi</a>
-                    <a href="#pieeja">Pieeja</a>
-                    <a href="#jautajumi">Jautājumi</a>
-                    <a href="#kontakti">Kontakti</a>
-                    <a class="btn btn-primary" href="#kontakti">Pieteikt konsultāciju</a>
+                    <a href="#par-mums" data-i18n="nav.about"></a>
+                    <a href="#pakalpojumi" data-i18n="nav.services"></a>
+                    <a href="#pieeja" data-i18n="nav.approach"></a>
+                    <a href="#jautajumi" data-i18n="nav.questions"></a>
+                    <a href="#kontakti" data-i18n="nav.contacts"></a>
+                    <a class="btn btn-primary" href="#kontakti" data-i18n="nav.book"></a>
                 </div>
             </nav>
         </div>
@@ -1290,28 +1348,19 @@
             <div class="container">
                 <div class="hero-grid">
                     <div class="reveal visible">
-                        <div class="badge">Droša vide bērna pašizpausmei</div>
-                        <h1>
-                            Krāsas, sajūtas un
-                            <span>mierīgs atbalsts</span>
-                            bērna pasaulē
-                        </h1>
-                        <p>
-                            “Sajūtu Krāsas” ir mākslas terapijas telpa bērniem, kur radošais
-                            process kļūst par saudzīgu veidu, kā izteikt emocijas, attīstīt
-                            pašizpratni, stiprināt drošības sajūtu un veicināt savstarpējo
-                            saprašanos.
-                        </p>
+                        <div class="badge" data-i18n="hero.badge"></div>
+                        <h1 data-i18n-html="hero.titleHtml"></h1>
+                        <p data-i18n="hero.text"></p>
 
                         <div class="hero-actions">
-                            <a href="#kontakti" class="btn btn-primary">Pieteikt pirmo sarunu</a>
-                            <a href="#par-mums" class="btn btn-secondary">Uzzināt par pieeju</a>
+                            <a href="#kontakti" class="btn btn-primary" data-i18n="hero.ctaPrimary"></a>
+                            <a href="#par-mums" class="btn btn-secondary" data-i18n="hero.ctaSecondary"></a>
                         </div>
 
                         <div class="hero-note">
-                            <span>Bērniem no 4 līdz 12 gadiem</span>
-                            <span>Individuālas un grupu nodarbības</span>
-                            <span>Mierīga, strukturēta vide</span>
+                            <span data-i18n="hero.note1"></span>
+                            <span data-i18n="hero.note2"></span>
+                            <span data-i18n="hero.note3"></span>
                         </div>
                     </div>
 
@@ -1321,17 +1370,13 @@
                         <div class="blob blob-3"></div>
 
                         <div class="floating-card card-a">
-                            <h4>Saudzīga pieeja</h4>
-                            <p>
-                                Radošais process palīdz bērnam izteikt to, ko ne vienmēr ir viegli pateikt vārdos.
-                            </p>
+                            <h4 data-i18n="hero.cardA.title"></h4>
+                            <p data-i18n="hero.cardA.text"></p>
                         </div>
 
                         <div class="floating-card card-b">
-                            <h4>Vecākiem saprotami</h4>
-                            <p>
-                                Svarīga ir drošība, uzticēšanās un skaidra, cieņpilna sadarbība ar ģimeni.
-                            </p>
+                            <h4 data-i18n="hero.cardB.title"></h4>
+                            <p data-i18n="hero.cardB.text"></p>
                         </div>
 
                         <div class="hero-card-main">
@@ -1360,20 +1405,20 @@
 
                 <div class="stats stats-grid reveal">
                     <div class="stat-card">
-                        <strong>1:1</strong>
-                        <span>Individuāli pielāgota pieeja katram bērnam</span>
+                        <strong data-i18n="stats.0.value"></strong>
+                        <span data-i18n="stats.0.label"></span>
                     </div>
                     <div class="stat-card">
-                        <strong>4–12</strong>
-                        <span>Vecumam atbilstošas nodarbību formas</span>
+                        <strong data-i18n="stats.1.value"></strong>
+                        <span data-i18n="stats.1.label"></span>
                     </div>
                     <div class="stat-card">
-                        <strong>Droši</strong>
-                        <span>Mierīga un strukturēta vide ar skaidru ritmu</span>
+                        <strong data-i18n="stats.2.value"></strong>
+                        <span data-i18n="stats.2.label"></span>
                     </div>
                     <div class="stat-card">
-                        <strong>Radoši</strong>
-                        <span>Krāsas, formas, materiāli un simboliska izteiksme</span>
+                        <strong data-i18n="stats.3.value"></strong>
+                        <span data-i18n="stats.3.label"></span>
                     </div>
                 </div>
             </div>
@@ -1383,39 +1428,26 @@
             <div class="container">
                 <div class="about-layout">
                     <div class="soft-panel reveal">
-                        <div class="badge">Par mums</div>
-                        <h2 class="section-title">Mākslas terapija kā maigs atbalsts bērna attīstībai</h2>
-                        <p class="section-subtitle">
-                            Mākslas terapija bērniem ir profesionāla, strukturēta un saudzīga pieeja,
-                            kurā radošais process kļūst par tiltu starp iekšējo pieredzi un drošu
-                            komunikāciju ar apkārtējo pasauli.
-                        </p>
+                        <div class="badge" data-i18n="about.badge"></div>
+                        <h2 class="section-title" data-i18n="about.title"></h2>
+                        <p class="section-subtitle" data-i18n="about.subtitle"></p>
 
                         <div class="bullets">
                             <div class="bullet">
                                 <div class="bullet-mark">1</div>
-                                <div>
-                                    Bērns var izpaust sajūtas un domas vizuāli, ne tikai vārdos.
-                                </div>
+                                <div data-i18n="about.bullets.0"></div>
                             </div>
                             <div class="bullet">
                                 <div class="bullet-mark">2</div>
-                                <div>
-                                    Nodarbības tiek pielāgotas bērna vecumam, vajadzībām, tempam un uztverei.
-                                </div>
+                                <div data-i18n="about.bullets.1"></div>
                             </div>
                             <div class="bullet">
                                 <div class="bullet-mark">3</div>
-                                <div>
-                                    Īpaša nozīme ir drošības sajūtai, paredzamībai, attiecībām un saudzīgam ritmam.
-                                </div>
+                                <div data-i18n="about.bullets.2"></div>
                             </div>
                         </div>
 
-                        <div class="mini-quote">
-                            Mēs ticam, ka radošums var kļūt par mierīgu telpu, kur bērns jūtas pieņemts,
-                            sadzirdēts un saprasts.
-                        </div>
+                        <div class="mini-quote" data-i18n="about.quote"></div>
                     </div>
 
                     <div class="art-board reveal">
@@ -1425,19 +1457,13 @@
                         <div class="swatch sw4"></div>
 
                         <div class="note-card note-1">
-                            <h4>Kam tas var palīdzēt?</h4>
-                            <p>
-                                Emociju izpausmei, trauksmes mazināšanai, pašapziņas stiprināšanai
-                                un sociālo prasmju veicināšanai.
-                            </p>
+                            <h4 data-i18n="about.note1.title"></h4>
+                            <p data-i18n="about.note1.text"></p>
                         </div>
 
                         <div class="note-card note-2">
-                            <h4>Bērniem ar dažādām vajadzībām</h4>
-                            <p>
-                                Saudzīgi pielāgota pieeja bērniem ar sensorām īpatnībām un
-                                autiskā spektra traucējumiem.
-                            </p>
+                            <h4 data-i18n="about.note2.title"></h4>
+                            <p data-i18n="about.note2.text"></p>
                         </div>
                     </div>
                 </div>
@@ -1446,40 +1472,27 @@
 
         <section class="section" id="kam-piemerots">
             <div class="container">
-                <div class="badge">Kam paredzēts</div>
-                <h2 class="section-title">Bērniem, kuriem ir svarīga droša un saprotama vide</h2>
-                <p class="section-subtitle">
-                    “Sajūtu Krāsas” ir piemērots bērniem, kuri vēlas radoši darboties, kā arī bērniem,
-                    kuriem ir grūtāk izteikt emocijas vārdos vai kuriem nepieciešama mierīgāka,
-                    strukturētāka vide.
-                </p>
+                <div class="badge" data-i18n="suitable.badge"></div>
+                <h2 class="section-title" data-i18n="suitable.title"></h2>
+                <p class="section-subtitle" data-i18n="suitable.subtitle"></p>
 
                 <div class="grid-3">
                     <article class="card reveal">
                         <div class="icon">🎨</div>
-                        <h3>Bērniem ar bagātu iekšējo pasauli</h3>
-                        <p>
-                            Tiem, kuri labprāt zīmē, veido, eksperimentē ar krāsām un vieglāk
-                            komunicē caur radošu procesu.
-                        </p>
+                        <h3 data-i18n="suitable.cards.0.title"></h3>
+                        <p data-i18n="suitable.cards.0.text"></p>
                     </article>
 
                     <article class="card reveal">
                         <div class="icon">💛</div>
-                        <h3>Bērniem ar emocionālām grūtībām</h3>
-                        <p>
-                            Situācijās, kad bērnam ir nepieciešams saudzīgs atbalsts trauksmes,
-                            sasprindzinājuma vai pārmaiņu laikā.
-                        </p>
+                        <h3 data-i18n="suitable.cards.1.title"></h3>
+                        <p data-i18n="suitable.cards.1.text"></p>
                     </article>
 
                     <article class="card reveal">
                         <div class="icon">🌿</div>
-                        <h3>Bērniem ar sensorām īpatnībām</h3>
-                        <p>
-                            Vide un darba process tiek veidoti tā, lai bērns justos mierīgi,
-                            droši un bez lieka pārslodzes riska.
-                        </p>
+                        <h3 data-i18n="suitable.cards.2.title"></h3>
+                        <p data-i18n="suitable.cards.2.text"></p>
                     </article>
                 </div>
             </div>
@@ -1487,52 +1500,37 @@
 
         <section class="section" id="pakalpojumi">
             <div class="container">
-                <div class="badge">Pakalpojumi</div>
-                <h2 class="section-title">Pārdomāti un saudzīgi atbalsta veidi bērnam un ģimenei</h2>
-                <p class="section-subtitle">
-                    Pakalpojumi veidoti tā, lai vecākiem būtu skaidrs process, bet bērnam —
-                    mierīga, droša un paredzama pieredze.
-                </p>
+                <div class="badge" data-i18n="services.badge"></div>
+                <h2 class="section-title" data-i18n="services.title"></h2>
+                <p class="section-subtitle" data-i18n="services.subtitle"></p>
 
                 <div class="grid-2">
                     <article class="card reveal">
                         <div class="icon">🧒</div>
-                        <h3>Individuālas mākslas terapijas nodarbības</h3>
-                        <p>
-                            Individuāli pielāgots darbs ar bērnu, izmantojot zīmēšanu, krāsu,
-                            formu, materiālu un simbolisku izteiksmi.
-                        </p>
-                        <div class="service-tag">45–50 minūtes</div>
+                        <h3 data-i18n="services.cards.0.title"></h3>
+                        <p data-i18n="services.cards.0.text"></p>
+                        <div class="service-tag" data-i18n="services.cards.0.tag"></div>
                     </article>
 
                     <article class="card reveal">
                         <div class="icon">👨‍👩‍👧</div>
-                        <h3>Vecāku konsultācijas</h3>
-                        <p>
-                            Saruna par bērna vajadzībām, ikdienas grūtībām, atbalsta iespējām
-                            un piemērotāko terapijas ritmu.
-                        </p>
-                        <div class="service-tag">Pirms vai pēc nodarbību cikla</div>
+                        <h3 data-i18n="services.cards.1.title"></h3>
+                        <p data-i18n="services.cards.1.text"></p>
+                        <div class="service-tag" data-i18n="services.cards.1.tag"></div>
                     </article>
 
                     <article class="card reveal">
                         <div class="icon">👭</div>
-                        <h3>Mazas grupas bērniem</h3>
-                        <p>
-                            Nelielas grupu nodarbības strukturētā un mierīgā vidē sociālās
-                            mijiedarbības un sadarbības prasmju veicināšanai.
-                        </p>
-                        <div class="service-tag">Līdz 4 bērniem grupā</div>
+                        <h3 data-i18n="services.cards.2.title"></h3>
+                        <p data-i18n="services.cards.2.text"></p>
+                        <div class="service-tag" data-i18n="services.cards.2.tag"></div>
                     </article>
 
                     <article class="card reveal">
                         <div class="icon">🖍️</div>
-                        <h3>Radošās attīstības cikli</h3>
-                        <p>
-                            Tematiski nodarbību cikli, kuros radošais process tiek izmantots
-                            bērna pašizpausmes, uzmanības un iekšējā līdzsvara stiprināšanai.
-                        </p>
-                        <div class="service-tag">4 vai 8 nodarbību cikli</div>
+                        <h3 data-i18n="services.cards.3.title"></h3>
+                        <p data-i18n="services.cards.3.text"></p>
+                        <div class="service-tag" data-i18n="services.cards.3.tag"></div>
                     </article>
                 </div>
             </div>
@@ -1540,44 +1538,33 @@
 
         <section class="section" id="pieeja">
             <div class="container">
-                <div class="badge">Mūsu pieeja</div>
-                <h2 class="section-title">Skaidrs, mierīgs un bērnam saprotams process</h2>
-                <p class="section-subtitle">
-                    Lai bērns justos droši, ļoti svarīgs ir paredzams ritms, saudzīga komunikācija
-                    un vide, kurā nav jāpierāda sevi vai jāsteidzas.
-                </p>
+                <div class="badge" data-i18n="approach.badge"></div>
+                <h2 class="section-title" data-i18n="approach.title"></h2>
+                <p class="section-subtitle" data-i18n="approach.subtitle"></p>
 
                 <div class="steps">
                     <div class="step reveal">
                         <div class="step-number">1</div>
-                        <h3>Pirmā saruna ar vecākiem</h3>
-                        <p>
-                            Iepazīstam bērna vajadzības, ikdienas situāciju un iespējamos atbalsta mērķus.
-                        </p>
+                        <h3 data-i18n="approach.steps.0.title"></h3>
+                        <p data-i18n="approach.steps.0.text"></p>
                     </div>
 
                     <div class="step reveal">
                         <div class="step-number">2</div>
-                        <h3>Saudzīga iepazīšanās</h3>
-                        <p>
-                            Bērns iepazīst telpu, materiālus un nodarbības ritmu sev drošā tempā.
-                        </p>
+                        <h3 data-i18n="approach.steps.1.title"></h3>
+                        <p data-i18n="approach.steps.1.text"></p>
                     </div>
 
                     <div class="step reveal">
                         <div class="step-number">3</div>
-                        <h3>Radošais process</h3>
-                        <p>
-                            Zīmēšana, gleznošana, kolāža, formas un simboli kļūst par pašizpausmes veidu.
-                        </p>
+                        <h3 data-i18n="approach.steps.2.title"></h3>
+                        <p data-i18n="approach.steps.2.text"></p>
                     </div>
 
                     <div class="step reveal">
                         <div class="step-number">4</div>
-                        <h3>Atgriezeniskā saite</h3>
-                        <p>
-                            Vecāki saņem skaidru, cieņpilnu un saprotamu ieskatu par turpmāko atbalstu.
-                        </p>
+                        <h3 data-i18n="approach.steps.3.title"></h3>
+                        <p data-i18n="approach.steps.3.text"></p>
                     </div>
                 </div>
             </div>
@@ -1585,35 +1572,27 @@
 
         <section class="section" id="kapec-mes">
             <div class="container">
-                <div class="badge">Kāpēc izvēlēties mūs</div>
-                <h2 class="section-title">Vide, kurā bērns nav jāpārveido — viņš drīkst būt pats</h2>
-                <p class="section-subtitle">
-                    Mēs veidojam vidi, kas vienlaikus nomierina, iedrošina un rada uzticēšanos.
-                </p>
+                <div class="badge" data-i18n="why.badge"></div>
+                <h2 class="section-title" data-i18n="why.title"></h2>
+                <p class="section-subtitle" data-i18n="why.subtitle"></p>
 
                 <div class="grid-3">
                     <article class="card reveal">
                         <div class="icon">🤍</div>
-                        <h3>Mierīga atmosfēra</h3>
-                        <p>
-                            Maigas krāsas, strukturēta telpa un paredzams nodarbību ritms palīdz bērnam justies drošāk.
-                        </p>
+                        <h3 data-i18n="why.cards.0.title"></h3>
+                        <p data-i18n="why.cards.0.text"></p>
                     </article>
 
                     <article class="card reveal">
                         <div class="icon">🌼</div>
-                        <h3>Individuāls skatījums</h3>
-                        <p>
-                            Katrs bērns ir atšķirīgs, tāpēc svarīga ir pieeja, kas pielāgojas viņa tempam un vajadzībām.
-                        </p>
+                        <h3 data-i18n="why.cards.1.title"></h3>
+                        <p data-i18n="why.cards.1.text"></p>
                     </article>
 
                     <article class="card reveal">
                         <div class="icon">🫶</div>
-                        <h3>Sadarbība ar ģimeni</h3>
-                        <p>
-                            Vecāki ir nozīmīga procesa daļa, un komunikācijā svarīga ir skaidrība, cieņa un uzticēšanās.
-                        </p>
+                        <h3 data-i18n="why.cards.2.title"></h3>
+                        <p data-i18n="why.cards.2.text"></p>
                     </article>
                 </div>
             </div>
@@ -1621,35 +1600,24 @@
 
         <section class="section" id="atsauksmes">
             <div class="container">
-                <div class="badge">Atsauksmes</div>
-                <h2 class="section-title">Sirsnīga un uzticama pieredze ģimenēm</h2>
-                <p class="section-subtitle">
-                    Zemāk ir demonstratīvas atsauksmes mājaslapas dizaina paraugam.
-                </p>
+                <div class="badge" data-i18n="testimonials.badge"></div>
+                <h2 class="section-title" data-i18n="testimonials.title"></h2>
+                <p class="section-subtitle" data-i18n="testimonials.subtitle"></p>
 
                 <div class="grid-3">
                     <article class="card testimonial reveal">
-                        <p>
-                            Mūsu bērnam bija svarīgi, ka vide nav skaļa un steidzīga. Pēc dažām nodarbībām
-                            viņš kļuva drošāks un vairāk iesaistījās radošajā procesā.
-                        </p>
-                        <small>— Anna, mamma</small>
+                        <p data-i18n="testimonials.items.0.text"></p>
+                        <small data-i18n="testimonials.items.0.author"></small>
                     </article>
 
                     <article class="card testimonial reveal">
-                        <p>
-                            Ļoti novērtēju mierīgo komunikāciju un skaidro pieeju. Mums kā vecākiem bija svarīgi
-                            just, ka bērns tiek saprasts, nevis vērtēts.
-                        </p>
-                        <small>— Elīna, mamma</small>
+                        <p data-i18n="testimonials.items.1.text"></p>
+                        <small data-i18n="testimonials.items.1.author"></small>
                     </article>
 
                     <article class="card testimonial reveal">
-                        <p>
-                            Telpa, krāsas un attieksme rada uzticēšanos jau no pirmā brīža. Patika, ka viss ir
-                            pārdomāts un bērnam draudzīgs.
-                        </p>
-                        <small>— Mārtiņš, tētis</small>
+                        <p data-i18n="testimonials.items.2.text"></p>
+                        <small data-i18n="testimonials.items.2.author"></small>
                     </article>
                 </div>
             </div>
@@ -1657,63 +1625,48 @@
 
         <section class="section" id="jautajumi">
             <div class="container">
-                <div class="badge">Biežākie jautājumi</div>
-                <h2 class="section-title">Tas, ko vecāki visbiežāk vēlas zināt</h2>
-                <p class="section-subtitle">
-                    Skaidras atbildes palīdz justies drošāk jau pirms pirmās tikšanās.
-                </p>
+                <div class="badge" data-i18n="faq.badge"></div>
+                <h2 class="section-title" data-i18n="faq.title"></h2>
+                <p class="section-subtitle" data-i18n="faq.subtitle"></p>
 
                 <div class="faq">
                     <div class="faq-item reveal">
                         <button class="faq-question">
-                            <span>Kas ir mākslas terapija bērniem?</span>
+                            <span data-i18n="faq.items.0.question"></span>
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Mākslas terapijā radošais process tiek izmantots kā saudzīgs veids,
-                                kā bērns var izpaust sajūtas, attīstīt pašizpratni un drošāk veidot kontaktu ar
-                                apkārtējo vidi.
-                            </div>
+                            <div class="faq-answer-inner" data-i18n="faq.items.0.answer"></div>
                         </div>
                     </div>
 
                     <div class="faq-item reveal">
                         <button class="faq-question">
-                            <span>Vai bērnam ir jāprot zīmēt?</span>
+                            <span data-i18n="faq.items.1.question"></span>
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Nē. Šeit nav svarīgas mākslinieciskas prasmes. Galvenais ir process,
-                                pašizpausme un bērna iekšējā pieredze, nevis rezultāta “pareizums”.
-                            </div>
+                            <div class="faq-answer-inner" data-i18n="faq.items.1.answer"></div>
                         </div>
                     </div>
 
                     <div class="faq-item reveal">
                         <button class="faq-question">
-                            <span>Vai nodarbības ir piemērotas bērniem ar autiskā spektra traucējumiem?</span>
+                            <span data-i18n="faq.items.2.question"></span>
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Jā, pieeja var tikt saudzīgi pielāgota bērniem ar autiskā spektra traucējumiem,
-                                īpašu uzmanību pievēršot videi, ritmam, sensorajām vajadzībām un komunikācijai.
-                            </div>
+                            <div class="faq-answer-inner" data-i18n="faq.items.2.answer"></div>
                         </div>
                     </div>
 
                     <div class="faq-item reveal">
                         <button class="faq-question">
-                            <span>Kā notiek pirmā tikšanās?</span>
+                            <span data-i18n="faq.items.3.question"></span>
                             <span>+</span>
                         </button>
                         <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Vispirms notiek īsa saruna ar vecākiem, lai saprastu bērna vajadzības,
-                                pēc tam pakāpeniska iepazīšanās ar vidi un iespējamo nodarbību ritmu.
-                            </div>
+                            <div class="faq-answer-inner" data-i18n="faq.items.3.answer"></div>
                         </div>
                     </div>
                 </div>
@@ -1724,70 +1677,60 @@
             <div class="container">
                 <div class="contact-wrap">
                     <div class="contact-card reveal">
-                        <div class="badge">Kontakti</div>
-                        <h2 class="section-title">Sazinies ar mums</h2>
-                        <p class="section-subtitle">
-                            Ja vēlies uzzināt vairāk par iespējām, uzdot jautājumu vai pieteikt pirmo konsultāciju,
-                            sazinies sev ērtākajā veidā.
-                        </p>
+                        <div class="badge" data-i18n="contact.badge"></div>
+                        <h2 class="section-title" data-i18n="contact.title"></h2>
+                        <p class="section-subtitle" data-i18n="contact.subtitle"></p>
 
                         <div class="contact-list">
                             <div class="contact-item">
                                 <div class="icon" style="margin:0;">📍</div>
                                 <div>
-                                    <strong>Adrese</strong>
-                                    <span>Rīga, Brīvības iela 120, LV-1012</span>
+                                    <strong data-i18n="contact.addressLabel"></strong>
+                                    <span data-i18n="contact.addressValue"></span>
                                 </div>
                             </div>
 
                             <div class="contact-item">
                                 <div class="icon" style="margin:0;">📞</div>
                                 <div>
-                                    <strong>Tālrunis</strong>
-                                    <span>+371 20000000</span>
+                                    <strong data-i18n="contact.phoneLabel"></strong>
+                                    <span data-i18n="contact.phoneValue"></span>
                                 </div>
                             </div>
 
                             <div class="contact-item">
                                 <div class="icon" style="margin:0;">✉️</div>
                                 <div>
-                                    <strong>E-pasts</strong>
-                                    <span>info@sajutukrasas.lv</span>
+                                    <strong data-i18n="contact.emailLabel"></strong>
+                                    <span data-i18n="contact.emailValue"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="contact-card reveal">
-                        <h3 style="margin-top: 0; font-size: 1.5rem;">Pieteikuma forma</h3>
-                        <p class="section-subtitle" style="margin-bottom: 18px;">
-                            Šī ir demonstratīva forma dizaina paraugam.
-                        </p>
+                        <h3 style="margin-top: 0; font-size: 1.5rem;" data-i18n="contact.formTitle"></h3>
+                        <p class="section-subtitle" style="margin-bottom: 18px;" data-i18n="contact.formSubtitle"></p>
 
                         <form class="contact-form" id="demoForm">
                             <div class="field">
-                                <label for="name">Vārds</label>
-                                <input type="text" id="name" name="name" placeholder="Tavs vārds" required />
+                                <label for="name" data-i18n="contact.nameLabel"></label>
+                                <input type="text" id="name" name="name" data-i18n-placeholder="contact.namePlaceholder" placeholder="" required />
                             </div>
 
                             <div class="field">
-                                <label for="email">E-pasts</label>
-                                <input type="email" id="email" name="email" placeholder="Tavs e-pasts" required />
+                                <label for="email" data-i18n="contact.emailFieldLabel"></label>
+                                <input type="email" id="email" name="email" data-i18n-placeholder="contact.emailPlaceholder" placeholder="" required />
                             </div>
 
                             <div class="field">
-                                <label for="message">Ziņa</label>
-                                <textarea id="message" name="message"
-                                    placeholder="Pastāsti īsi, par ko vēlies uzzināt"></textarea>
+                                <label for="message" data-i18n="contact.messageLabel"></label>
+                                <textarea id="message" name="message" data-i18n-placeholder="contact.messagePlaceholder" placeholder=""></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Nosūtīt pieteikumu</button>
-                            <p class="form-note">
-                                Demonstrācijas nolūkos forma neizsūta datus uz serveri.
-                            </p>
-                            <div class="success-message" id="successMessage">
-                                Paldies! Tavs pieteikums ir sagatavots demonstrācijas režīmā.
-                            </div>
+                            <button type="submit" class="btn btn-primary" data-i18n="contact.submit"></button>
+                            <p class="form-note" data-i18n="contact.formNote"></p>
+                            <div class="success-message" id="successMessage" data-i18n="contact.successMessage"></div>
                         </form>
                     </div>
                 </div>
@@ -1798,20 +1741,19 @@
     <footer class="site-footer">
         <div class="container">
             <div class="footer-inner">
-                <div>
-                    © 2026 Sajūtu Krāsas — Mākslas terapija bērniem
-                </div>
+                <div data-i18n="footer.copy"></div>
 
                 <div class="footer-links">
-                    <a href="#par-mums">Par mums</a>
-                    <a href="#pakalpojumi">Pakalpojumi</a>
-                    <a href="#jautajumi">Jautājumi</a>
-                    <a href="#kontakti">Kontakti</a>
+                    <a href="#par-mums" data-i18n="footer.about"></a>
+                    <a href="#pakalpojumi" data-i18n="footer.services"></a>
+                    <a href="#jautajumi" data-i18n="footer.questions"></a>
+                    <a href="#kontakti" data-i18n="footer.contacts"></a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <script src="texts.js"></script>
     <script>
         // Mobile menu
         const nav = document.getElementById("nav");
@@ -1877,6 +1819,18 @@
         });
 
         revealElements.forEach(el => observer.observe(el));
+
+        // Language switcher
+        const langButtons = document.querySelectorAll(".lang-btn");
+        const initialLang = (localStorage.getItem("siteLanguage") || "lv");
+
+        applyTranslations(initialLang);
+
+        langButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                applyTranslations(button.dataset.lang);
+            });
+        });
     </script>
 </body>
 
